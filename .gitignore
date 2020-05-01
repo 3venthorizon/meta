@@ -1,0 +1,29 @@
+# Compiled source #
+*.class
+*.dll
+target/
+bin/
+generated/
+classes/
+static/
+
+# Packages/Libs #
+*.jar
+*.war
+*.ear
+
+# IDE #
+*.bak
+*.iml
+.classpath
+.dbeaver*
+.project
+.springBeans
+.idea/
+.settings/
+gwt-unitCache/
+
+# Logs
+*.csv
+*.log
+*.checkstyle
