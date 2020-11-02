@@ -19,7 +19,7 @@
 		<maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
 
 		<!-- test -->
-		<junit.version>4.13</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<mockito-core.version>2.23.0</mockito-core.version>
 		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
 	</properties>
