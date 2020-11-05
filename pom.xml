@@ -25,7 +25,7 @@
 	</properties>
 
 	<modules>
-		<module>meta</module>
+		<module>meta-morphosis</module>
 		<module>eventhorizon</module>
 		<module>meta-mathics</module>
 		<module>meta-persistence-api</module>
@@ -121,7 +121,7 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<artifactId>meta</artifactId>
+				<artifactId>meta-morphosis</artifactId>
 				<groupId>com.devlambda</groupId>
 				<version>${project.version}</version>
 			</dependency>

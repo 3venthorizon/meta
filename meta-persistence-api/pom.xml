@@ -55,7 +55,7 @@
 
 	<dependencies>
 		<dependency>
-            <artifactId>meta</artifactId>
+            <artifactId>meta-morphosis</artifactId>
             <groupId>com.devlambda</groupId>
 		</dependency>
 		<!-- test dependencies -->
