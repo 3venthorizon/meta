@@ -84,7 +84,7 @@ public class MapWrapperTest {
       BiConsumer<Pojo, Object> setter = (pojo, value) -> {};
       Property<Pojo, Object> property = spy(new Property<Pojo, Object>("MOCK", Object.class, getter, setter));
       type.getProperties().add(property);
-      Map<String, Object> wrapper = Meta.wrapMap(type, pojo);
+      Map<String, Object> wrapper = Morph.wrapMap(type, pojo);
       Entry<String, Object> entry = wrapper.entrySet().iterator().next();
       String value = Long.toHexString(random.nextLong());
       String update = Long.toHexString(random.nextLong());
@@ -101,27 +101,27 @@ public class MapWrapperTest {
 
    @Test
    public void testSize() {
-      Map<String, Object> wrapper = Meta.wrapMap(identityType, pojo);
+      Map<String, Object> wrapper = Morph.wrapMap(identityType, pojo);
       assertEquals(identityType.getProperties().size(), wrapper.size()); //test
 
-      wrapper = Meta.wrapMap(Type.meta(Pojo::new), pojo);
+      wrapper = Morph.wrapMap(Type.meta(Pojo::new), pojo);
       assertEquals(0, wrapper.size()); //test
       verifyZeroInteractions(pojo);
    }
 
    @Test
    public void testIsEmpty() {
-      Map<String, Object> wrapper = Meta.wrapMap(identityType, pojo);
+      Map<String, Object> wrapper = Morph.wrapMap(identityType, pojo);
       assertFalse(wrapper.isEmpty()); //test
       
-      wrapper = Meta.wrapMap(Type.meta(Pojo::new), pojo);
+      wrapper = Morph.wrapMap(Type.meta(Pojo::new), pojo);
       assertTrue(wrapper.isEmpty()); //test
       verifyZeroInteractions(pojo);
    }
 
    @Test
    public void testContainsKey() {
-      Map<String, Object> wrapper = Meta.wrapMap(identityType, pojo);
+      Map<String, Object> wrapper = Morph.wrapMap(identityType, pojo);
 
       assertTrue(identityType.getPropertyNames().stream().allMatch(wrapper::containsKey)); //test
       assertFalse(wrapper.containsKey("BAD KEY")); //test
@@ -131,8 +131,8 @@ public class MapWrapperTest {
 
    @Test
    public void testContainsValue() {
-      Map<String, Object> wrapper = Meta.wrapMap(identityType, pojo);
-      Iterator<Object> iterator = Meta.wrapIterator(identityType, pojo, 0);
+      Map<String, Object> wrapper = Morph.wrapMap(identityType, pojo);
+      Iterator<Object> iterator = Morph.wrapIterator(identityType, pojo, 0);
       
       while (iterator.hasNext()) {
          assertTrue(wrapper.containsValue(iterator.next())); //test
@@ -153,7 +153,7 @@ public class MapWrapperTest {
 
    @Test
    public void testGet() {
-      Map<String, Object> wrapper = Meta.wrapMap(identityType, pojo);
+      Map<String, Object> wrapper = Morph.wrapMap(identityType, pojo);
       
       assertEquals(pojo.text, wrapper.get("TEXT"));
       assertEquals(pojo.money, wrapper.get("MONEY"));
@@ -182,7 +182,7 @@ public class MapWrapperTest {
       overloadType.getProperties().addAll(identityType.getProperties());
       //over loads the property TEXT, but this one points to Pojo#number
       overloadType.add("TEXT", Double.class, Pojo::getNumber, Pojo::setNumber);
-      Map<String, Object> wrapper = Meta.wrapMap(overloadType, pojo);
+      Map<String, Object> wrapper = Morph.wrapMap(overloadType, pojo);
       BigDecimal previousMoney = pojo.money;
       Double previousNumber = pojo.number;
       
@@ -202,7 +202,7 @@ public class MapWrapperTest {
 
    @Test
    public void testRemove() {
-      Map<String, Object> wrapper = spy(Meta.wrapMap(identityType, pojo));
+      Map<String, Object> wrapper = spy(Morph.wrapMap(identityType, pojo));
       String key = Long.toHexString(random.nextLong());
       Object previous = mock(Object.class);
       
@@ -214,7 +214,7 @@ public class MapWrapperTest {
 
    @Test
    public void testPutAll() {
-      Map<String, Object> wrapper = spy(Meta.wrapMap(identityType, pojo));
+      Map<String, Object> wrapper = spy(Morph.wrapMap(identityType, pojo));
       Map<String, Object> map = new HashMap<>();
       map.put("TEXT", Long.toHexString(random.nextLong()));
       map.put("COUNT", Integer.MIN_VALUE);
@@ -238,7 +238,7 @@ public class MapWrapperTest {
 
    @Test
    public void testClear() {
-      Map<String, Object> wrapper = Meta.wrapMap(identityType, pojo);
+      Map<String, Object> wrapper = Morph.wrapMap(identityType, pojo);
 
       wrapper.clear(); //test
       
@@ -255,7 +255,7 @@ public class MapWrapperTest {
    @Test
    @SuppressWarnings("unchecked")
    public void testKeySet() {
-      Map<String, Object> wrapper = spy(Meta.wrapMap(identityType, pojo));
+      Map<String, Object> wrapper = spy(Morph.wrapMap(identityType, pojo));
       
       Set<String> result = wrapper.keySet(); //test
       
@@ -291,7 +291,7 @@ public class MapWrapperTest {
 
    @Test
    public void testValues() {
-      Map<String, Object> wrapper = Meta.wrapMap(identityType, pojo);
+      Map<String, Object> wrapper = Morph.wrapMap(identityType, pojo);
 
       Collection<Object> result = wrapper.values(); //test
       
@@ -305,8 +305,8 @@ public class MapWrapperTest {
    @Test
    @SuppressWarnings("unchecked")
    public void testEntrySet() {
-      Map<String, Object> wrapper = spy(Meta.wrapMap(identityType, pojo));
-      Iterator<Object> iterator = Meta.wrapIterator(identityType, pojo, 0);
+      Map<String, Object> wrapper = spy(Morph.wrapMap(identityType, pojo));
+      Iterator<Object> iterator = Morph.wrapIterator(identityType, pojo, 0);
 
       Set<Entry<String, Object>> result = wrapper.entrySet(); //test
       

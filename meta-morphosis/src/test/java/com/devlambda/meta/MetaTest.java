@@ -66,13 +66,13 @@ public class MetaTest {
       metA.setNumber(pyth);
       metA.setTrouble(pi);
 
-      B metB = Meta.convert(typeA, metA, typeB);
+      B metB = Morph.convert(typeA, metA, typeB);
 
       assertEquals(field, metB.getA());
       assertEquals(pyth, metB.getB());
       assertEquals(pi, metB.getD().doubleValue(), 0.0d);
 
-      A reverse = Meta.convert(typeB, metB, typeA);
+      A reverse = Morph.convert(typeB, metB, typeA);
 
       assertEquals(field, reverse.getField());
       assertEquals(pyth, reverse.getNumber());

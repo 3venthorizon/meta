@@ -73,28 +73,28 @@ public class ListWrapperTest {
 
    @Test
    public void testSize() {
-      List<Object> wrapper = Meta.wrapList(identityType, pojo);
+      List<Object> wrapper = Morph.wrapList(identityType, pojo);
       assertEquals(identityType.getProperties().size(), wrapper.size()); //test
       
-      wrapper = Meta.wrapList(Type.meta(Pojo::new), pojo);
+      wrapper = Morph.wrapList(Type.meta(Pojo::new), pojo);
       assertEquals(0, wrapper.size()); //test
       verifyZeroInteractions(pojo);
    }
 
    @Test
    public void testIsEmpty() {
-      List<Object> wrapper = Meta.wrapList(identityType, pojo);
+      List<Object> wrapper = Morph.wrapList(identityType, pojo);
       assertFalse(wrapper.isEmpty()); //test
       
-      wrapper = Meta.wrapList(Type.meta(Pojo::new), pojo);
+      wrapper = Morph.wrapList(Type.meta(Pojo::new), pojo);
       assertTrue(wrapper.isEmpty()); //test
       verifyZeroInteractions(pojo);
    }
 
    @Test
    public void testContains() {
-      List<Object> wrapper = Meta.wrapList(identityType, pojo);
-      Iterator<Object> iterator = Meta.wrapIterator(identityType, pojo, 0);
+      List<Object> wrapper = Morph.wrapList(identityType, pojo);
+      Iterator<Object> iterator = Morph.wrapIterator(identityType, pojo, 0);
       
       while (iterator.hasNext()) {
          assertTrue(wrapper.contains(iterator.next())); //test
@@ -349,7 +349,7 @@ public class ListWrapperTest {
    public void testIndexOf() {
       pojo.setPrimitive(pojo.getNumber());
       ListWrapper<Pojo> wrapper = new ListWrapper<>(identityType, pojo);
-      ListIterator<Object> iterator = Meta.wrapIterator(identityType, pojo, 0);
+      ListIterator<Object> iterator = Morph.wrapIterator(identityType, pojo, 0);
       Property<Pojo, Object> number = identityType.getProperty("NUMBER");
       Property<Pojo, Object> primitive = identityType.getProperty("PRIMITIVE");
       int numberIndex = identityType.getProperties().indexOf(number);
@@ -383,7 +383,7 @@ public class ListWrapperTest {
    public void testLastIndexOf() {
       pojo.setPrimitive(pojo.getNumber());
       ListWrapper<Pojo> wrapper = new ListWrapper<>(identityType, pojo);
-      ListIterator<Object> iterator = Meta.wrapIterator(identityType, pojo, identityType.getProperties().size());
+      ListIterator<Object> iterator = Morph.wrapIterator(identityType, pojo, identityType.getProperties().size());
       Property<Pojo, Object> number = identityType.getProperty("NUMBER");
       Property<Pojo, Object> primitive = identityType.getProperty("PRIMITIVE");
       int numberIndex = identityType.getProperties().indexOf(number);

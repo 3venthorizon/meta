@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
  * 
  * @param <M> Meta
  * @author Dewald Pretorius
- * @see Meta#convert(Type, Object, Type, Object)
+ * @see Morph#convert(Type, Object, Type, Object)
  */
 public class Type<M> {
 

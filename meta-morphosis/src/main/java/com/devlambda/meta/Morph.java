@@ -13,9 +13,9 @@ import java.util.function.Supplier;
  *
  * @author Dewald Pretorius
  */
-public final class Meta {
+public final class Morph {
 
-   private Meta() {}
+   private Morph() {}
    
    /**
     * Converts the <code>map</code> instance and returns a newly created <code>converted</code> instance. 

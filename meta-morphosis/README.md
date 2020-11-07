@@ -52,7 +52,7 @@ Convenience interface wrappers such as java.util.Map, java.util.List, and java.u
 to access Java object instances when configuring 
 [Type](https://github.com/3venthorizon/meta/blob/master/meta-morphosis/src/main/java/com/devlambda/meta/Type.java)s for Java 
 classes. Depending on the access pattern strategy you want to implement the 
-[Meta](https://github.com/3venthorizon/meta/blob/master/meta-morphosis/src/main/java/com/devlambda/meta/Meta.java).wrapXXX methods
+[Meta](https://github.com/3venthorizon/meta/blob/master/meta-morphosis/src/main/java/com/devlambda/meta/Morph.java).wrapXXX methods
 will wrap plain old Java object instances with the respectively named interface.
 
 It is important to note that these Java Collections interface wrappers do not copy or transform instance data from
@@ -62,21 +62,21 @@ wrapped getter and setter functional interfaces of the Java class definition.
 ```java
 public void mapPersonExample(Type<Person> typePerson, Person person) {
    person.setName("Leon");
-   Map<String, Object> mapPerson = Meta.wrapMap(typePerson, person); 
+   Map<String, Object> mapPerson = Morph.wrapMap(typePerson, person); 
    String oldName = mapPerson.put("name", "Dewald"); //returns "Leon"
    System.out.println("Person renamed from " + oldName + " to " + mapPerson.get("name"));
 }
 
 public void listPersonExample(Type<Person> typePerson, Person person) {
    person.setName("Leon");
-   List<Object> listPerson = Meta.wrapList(typePerson, person); 
+   List<Object> listPerson = Morph.wrapList(typePerson, person); 
    String oldName = listPerson.set(0, "Dewald"); //returns "Leon"
    System.out.println("Person renamed from " + oldName + " to " + listPerson.get(0));
 }
 
 public void iteratorPersonExample(Type<Person> typePerson, Person person) {
    person.setName("Leon");
-   Iterator<Object> iteratorPerson = Meta.wrapIterator(typePerson, person); 
+   Iterator<Object> iteratorPerson = Morph.wrapIterator(typePerson, person); 
    Object oldValue = iteratorPerson.next(); //returns "Leon"
    iteratorPerson.set("Dewald");
    System.out.println("Person renamed from " + oldValue + " to " + iteratorPerson.previous());

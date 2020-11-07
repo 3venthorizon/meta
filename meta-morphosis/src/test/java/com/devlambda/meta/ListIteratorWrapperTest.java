@@ -70,7 +70,7 @@ public class ListIteratorWrapperTest {
    @Test
    public void testNextXxx() {
       int expectNextIndex = 0;
-      ListIteratorWrapper<Pojo> iterator = (ListIteratorWrapper<Pojo>) Meta.wrapIterator(identityType, pojo, 0);
+      ListIteratorWrapper<Pojo> iterator = (ListIteratorWrapper<Pojo>) Morph.wrapIterator(identityType, pojo, 0);
       
       assertEquals(expectNextIndex++, iterator.nextIndex());
       assertTrue(iterator.hasNext());
@@ -177,7 +177,7 @@ public class ListIteratorWrapperTest {
 
    @Test
    public void testSet() {
-      ListIteratorWrapper<Pojo> iterator = (ListIteratorWrapper<Pojo>) Meta.wrapIterator(identityType, pojo, 0);
+      ListIteratorWrapper<Pojo> iterator = (ListIteratorWrapper<Pojo>) Morph.wrapIterator(identityType, pojo, 0);
       Object next = iterator.next();
       
       assertNotNull(next);
