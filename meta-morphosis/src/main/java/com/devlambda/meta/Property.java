@@ -37,7 +37,7 @@ public class Property<M, T> {
    }
    
    @SuppressWarnings({ "unchecked", "rawtypes" })
-   static Property meta(Field field) throws IllegalAccessException {
+   static Property meta(Field field) {
       boolean accessible = field.isAccessible();
       
       try {
@@ -50,6 +50,8 @@ public class Property<M, T> {
          BiConsumer setter = (instance, value) -> setter(setFieldMh, instance, value);
          
          return new Property(field.getName(), field.getType(), getter, setter);
+      } catch (IllegalAccessException e) {
+         throw new RuntimeException("Error reflecting Property from Field", e);
       } finally {
          field.setAccessible(accessible);
       }

@@ -75,7 +75,7 @@ public class Type<M> {
    }
    
    @SuppressWarnings("unchecked")
-   public static <M> Type<M> meta(Supplier<M> creator, Class<M> concrete) throws IllegalAccessException {
+   public static <M> Type<M> meta(Supplier<M> creator, Class<M> concrete) {
       Type<M> type = meta(creator);
       Class<?> inherited = concrete;
       
