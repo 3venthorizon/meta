@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 
 /**
- * Meta is an utility class that provides static methods which operates on {@link Type}s.
+ * Morph is an utility class that provides static methods which operates on {@link Type}s.
  *
  * @author Dewald Pretorius
  */
@@ -133,7 +133,7 @@ public final class Morph {
             getter = from.getProperty(setter.name);
             if (getter == null) continue;
             Object value = getter.get.apply(meta);
-            if (value != null && !setter.type.isAssignableFrom(value.getClass())) continue;
+            if (value != null && !setter.isAssignableFrom(value.getClass())) continue;
          }
 
          Object value = getter.get.apply(meta);

@@ -3,6 +3,7 @@ package com.devlambda.meta;
 
 import static java.util.stream.Collectors.toCollection;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -71,6 +72,22 @@ public class Type<M> {
     */
    public static <M> Type<M> meta(Supplier<M> creator) {
       return new Type<>(creator);
+   }
+   
+   @SuppressWarnings("unchecked")
+   public static <M> Type<M> meta(Supplier<M> creator, Class<M> concrete) throws IllegalAccessException {
+      Type<M> type = meta(creator);
+      Class<?> inherited = concrete;
+      
+      while (inherited != null && !Object.class.equals(inherited)) {
+         for (Field field : inherited.getDeclaredFields()) {
+            type.properties.add(Property.meta(field));
+         }
+         
+         inherited = inherited.getSuperclass();
+      }
+      
+      return type;
    }
 
    /**
@@ -159,7 +176,7 @@ public class Type<M> {
    @SuppressWarnings("unchecked")
    public <T> Property<M, T> getProperty(String name, Class<T> meta) {
       return (Property<M, T>) properties.stream()
-            .filter(property -> Objects.equals(name, property.name) && meta.isAssignableFrom(property.type))
+            .filter(property -> Objects.equals(name, property.name) && property.isAssignableFrom(meta))
             .findFirst().orElse(null);
    }
 

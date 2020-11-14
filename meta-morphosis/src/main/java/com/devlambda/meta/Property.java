@@ -1,6 +1,9 @@
 package com.devlambda.meta;
 
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.reflect.Field;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -31,6 +34,53 @@ public class Property<M, T> {
       this.type = type;
       this.get = get;
       this.set = (BiConsumer<M, T>) set;
+   }
+   
+   @SuppressWarnings({ "unchecked", "rawtypes" })
+   static Property meta(Field field) throws IllegalAccessException {
+      boolean accessible = field.isAccessible();
+      
+      try {
+         field.setAccessible(true);
+      
+         MethodHandles.Lookup caller = MethodHandles.lookup();
+         MethodHandle getFieldMh = caller.unreflectGetter(field);
+         MethodHandle setFieldMh = caller.unreflectSetter(field);
+         Function getter = instance -> getter(getFieldMh, instance);
+         BiConsumer setter = (instance, value) -> setter(setFieldMh, instance, value);
+         
+         return new Property(field.getName(), field.getType(), getter, setter);
+      } finally {
+         field.setAccessible(accessible);
+      }
+   }
+   
+   static Object getter(MethodHandle methodHandle, Object instance) {
+      try {
+         return methodHandle.invoke(instance);
+      } catch (Throwable e) {
+         throw new RuntimeException("Property getter failed", e);
+      }
+   }
+   
+   static void setter(MethodHandle methodHandle, Object instance, Object value) {
+      try {
+         methodHandle.invoke(instance, value);
+      } catch (Throwable e) {
+         throw new RuntimeException("Property setter failed", e);
+      }
+   }
+   
+   public boolean isAssignableFrom(Class<?> type) {
+      if (this.type.isPrimitive()) {
+         if (!(Number.class.isAssignableFrom(type)) && 
+               !(Boolean.class.isAssignableFrom(type)) && 
+               !(Character.class.isAssignableFrom(type))) return false;
+         
+         return true;
+      } 
+      
+      return this.type.isAssignableFrom(type);
    }
    
    /**

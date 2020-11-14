@@ -3,15 +3,17 @@ package com.devlambda.meta;
 
 import static org.junit.Assert.*;
 
+import java.util.Map;
+
 import org.junit.Test;
 
 
 /**
- * MetaTest 
+ * MorhpTest 
  *
  * @author Dewald Pretorius
  */
-public class MetaTest {
+public class MorhpTest {
 
    static class A {
       private String field;
@@ -26,6 +28,13 @@ public class MetaTest {
 
       public Double getTrouble() { return trouble; }
       public void setTrouble(Double trouble) { this.trouble = trouble; }
+   }
+   
+   static class Ac extends A {
+      private String inherited;
+
+      public String getInherited() { return inherited; }
+      public void setInherited(String inherited) { this.inherited = inherited; }
    }
 
    static class B {
@@ -44,7 +53,7 @@ public class MetaTest {
    }
 
    @Test
-   public void test() {
+   public void testMorphLambda() {
       String field = "Field";
       int pyth = 345;
       double pi = Math.PI;
@@ -79,4 +88,31 @@ public class MetaTest {
       assertEquals(pi, reverse.getTrouble().doubleValue(), 0.0d);
    }
 
+   @Test
+   public void testMorphReflection() throws IllegalAccessException {
+      String field = "Field";
+      int pyth = 345;
+      double pi = Math.PI;
+      String inherited = "Inherited";
+      
+      Type<Ac> typeA = Type.meta(Ac::new, Ac.class);
+      Ac metAc = new Ac();
+
+      Map<String, Object> map = Morph.wrapMap(typeA, metAc);
+      
+      map.put("field", field);
+      map.put("number", pyth);
+      map.put("trouble", pi);
+      map.put("inherited", inherited);
+      
+      assertEquals(field, metAc.getField());
+      assertEquals(pyth, metAc.getNumber());
+      assertEquals(Double.valueOf(pi), metAc.getTrouble());
+      assertEquals(inherited, metAc.getInherited());
+      
+      assertEquals(metAc.getField(), map.get("field"));
+      assertEquals(Integer.valueOf(metAc.getNumber()), map.get("number"));
+      assertEquals(metAc.getTrouble(), map.get("trouble"));
+      assertEquals(metAc.getInherited(), map.get("inherited"));
+   }
 }
