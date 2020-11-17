@@ -74,12 +74,20 @@ public class Type<M> {
       return new Type<>(creator);
    }
    
+   /**
+    * Creates a Type instance with {@link Properties} which have been reflected from the concrete POJO class's fields.
+    * 
+    * @param <M> metaType
+    * @param creator of meta instances
+    * @param concrete class
+    * @return type
+    */
    @SuppressWarnings("unchecked")
    public static <M> Type<M> meta(Supplier<M> creator, Class<M> concrete) {
       Type<M> type = meta(creator);
       Class<?> inherited = concrete;
       
-      while (inherited != null && !Object.class.equals(inherited)) {
+      while (!Objects.equals(inherited, Object.class)) {
          for (Field field : inherited.getDeclaredFields()) {
             type.properties.add(Property.meta(field));
          }
