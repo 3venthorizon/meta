@@ -7,7 +7,7 @@ changed during runtime. Thus the structure and access methods for data is predef
 source code is updated and recompiled. However, Java does provide class abstraction and interfaces to provide 
 polomorphic access during runtime. But still these abstractions and interfaces are predefined in source code.
 
-## Runtime Meta Class and Property Wrappers
+## Runtime Meta Type and Property Wrappers
 While classes are predefined at the time it was compiled, this API has the ability to define data structures and their 
 access methods dynamically during runtime.
 
@@ -18,8 +18,8 @@ wrappers for classes and their methods respectively.
 
 ### Type
 A Type is synonymous with a Java class or interface declaration, except that Types are declared programmatically.The 
-Type instance wraps the generic Meta Java type declaration. A Type contains a Property list similar to a class 
-containing member fields along with their respective getter and setter methods. 
+Type instance wraps a Java Class. A Type contains a Property list similar to a class containing member fields 
+along with their respective getter and setter methods. 
 
 Types are easy to create as it implements a builder pattern.
 
@@ -32,8 +32,8 @@ Type<Person> typePerson = Type.meta(Person::new) //wraps a Person class construc
  .add("contact", Contact.class, Contact::getContactDetails, Contact::setContactDetails);
 ```
 
-Once a Type is instantiated it can be used to dynamically access Meta type instances. This allows the developer 
-to selectively expose properties via 
+Once a Type is instantiated it can be used to dynamically access an object's field getters and setters. This allows the developer 
+to selectively expose Properties via 
 [Type](https://github.com/3venthorizon/meta/blob/master/meta-morphosis/src/main/java/com/devlambda/meta/Type.java).getProperties()
 etc whilst honouring the underlying class's data access pattern. 
 
@@ -52,7 +52,7 @@ Convenience interface wrappers such as java.util.Map, java.util.List, and java.u
 to access Java object instances when configuring 
 [Type](https://github.com/3venthorizon/meta/blob/master/meta-morphosis/src/main/java/com/devlambda/meta/Type.java)s for Java 
 classes. Depending on the access pattern strategy you want to implement the 
-[Meta](https://github.com/3venthorizon/meta/blob/master/meta-morphosis/src/main/java/com/devlambda/meta/Morph.java).wrapXXX methods
+[Morph](https://github.com/3venthorizon/meta/blob/master/meta-morphosis/src/main/java/com/devlambda/meta/Morph.java).wrapXXX methods
 will wrap plain old Java object instances with the respectively named interface.
 
 It is important to note that these Java Collections interface wrappers do not copy or transform instance data from
