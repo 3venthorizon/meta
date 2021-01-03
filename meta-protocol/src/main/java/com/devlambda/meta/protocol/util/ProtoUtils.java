@@ -1,6 +1,5 @@
 package com.devlambda.meta.protocol.util;
 
-
 /**
  * @author Dewald Pretorius
  */
@@ -59,5 +58,18 @@ public final class ProtoUtils {
       }
 
       return offset;
+   }
+   
+   public static String getPrintDataText(byte[] data) {
+      StringBuilder sb = new StringBuilder(3 + 3 * data.length);
+      sb.append("0x[");
+      
+      for (int x = 0; x < data.length; x++) {
+         sb.append(String.format("%02X,", data[x] & 0xFF));
+      }
+      
+      sb.setCharAt(sb.length() -1, ']');
+      
+      return sb.toString();
    }
 }

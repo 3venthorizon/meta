@@ -65,7 +65,6 @@ public class RTUStream extends Stream<RTU> {
       }
 
       RTU readRegisters(byte[] buffer, int offset) throws IOException {
-
          while (offset < 3) {
             offset = read(buffer, offset);
          }
@@ -124,7 +123,6 @@ public class RTUStream extends Stream<RTU> {
       }
 
       RTU writeRegisters(byte[] buffer, int offset, int header) throws IOException {
-
          while (offset < header) {
             offset = read(buffer, offset);
          }
@@ -170,7 +168,6 @@ public class RTUStream extends Stream<RTU> {
 
    @Override
    protected byte[] readRawData(byte[] buffer, int offset, int length) throws IOException {
-
       if (offset > length) {
          in.reset();
          in.skip(length);

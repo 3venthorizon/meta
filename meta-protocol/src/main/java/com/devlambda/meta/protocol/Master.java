@@ -4,32 +4,28 @@ package com.devlambda.meta.protocol;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-import com.devlambda.eventhorizon.Observer;
-
 
 /**
  * @author Dewald Pretorius
  */
 @SuppressWarnings("hiding")
-public class Master<Packet extends com.devlambda.meta.protocol.Packet> extends Protocol<Packet> {
+public class Master<Packet extends com.devlambda.meta.protocol.Packet> {
 
+   protected Protocol<Packet> protocol;
    protected Semaphore semaphore;
    protected Packet response;
    protected ProtocolException error;
 
    public Master(Protocol<Packet> protocol) {
-      this(protocol.connection, protocol.stream);
+      this.protocol = protocol;
+      semaphore = new Semaphore(1, true);
+      
+      protocol.readEvent.add((master, response) -> slaveResponse(response));
+      protocol.errorEvent.add((master, error) -> slaveError(error));
    }
 
    public Master(Connection connection, Stream<Packet> stream) {
-      super(connection, stream);
-
-      semaphore = new Semaphore(1, true);
-      Observer<Protocol<Packet>, Packet> slaveResponse = (master, response) -> slaveResponse(response);
-      Observer<Protocol<Packet>, ProtocolException> slaveError = (master, error) -> slaveError(error);
-
-      readEvent.add(slaveResponse);
-      errorEvent.add(slaveError);
+      this(new Protocol<>(connection, stream));
    }
 
    /**
@@ -55,10 +51,18 @@ public class Master<Packet extends com.devlambda.meta.protocol.Packet> extends P
 
    }
 
+   public Protocol<Packet> getProtocol() {
+      return protocol;
+   }
+
+   public void setProtocol(Protocol<Packet> protocol) {
+      this.protocol = protocol;
+   }
+
    protected synchronized Packet requestResponse(Packet request, long timeout) throws ProtocolException {
       response = null;
       error = null;
-      send(request);
+      protocol.send(request);
 
       try {
          wait(timeout);

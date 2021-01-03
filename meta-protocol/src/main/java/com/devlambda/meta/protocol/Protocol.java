@@ -36,6 +36,7 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
       sendEvent = new Event<>();
       errorEvent = new Event<>();
       connectionEvent = new Event<>();
+      setEventExecutor(runnable -> new Thread(runnable, "Async Protocol Event").start());
 
       timeout = -1L;
       running = false;
@@ -47,7 +48,6 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
     */
    @Override
    public synchronized void run() {
-
       try {
          runner = Thread.currentThread();
          running = true;
@@ -62,11 +62,9 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
          running = false;
          reading = false;
       }
-
    }
 
    public void send(Packet packet) throws ProtocolException {
-
       try {
          stream.write(packet);
          sendEvent.fireEvent(this, packet);
@@ -80,7 +78,6 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
          errorEvent.fireEvent(this, pe);
          throw pe;
       }
-
    }
 
    public void stop() throws InterruptedException {
@@ -91,19 +88,19 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
       reading = false;
 
       if (timeout > 0L) runner.join(timeout);
-      if (runner.isAlive()) runner.interrupt();
-
       running = false;
+      if (runner.isAlive()) runner.interrupt();
+      if (runner.isAlive()) disconnect();
    }
 
    protected void connect() throws IOException {
-
       if (!connection.isConnected()) {
          connection.open();
+         stream.initialize(connection.getInputStream(), connection.getOutputStream());
          connectionEvent.fireEvent(this, connection);
+      } else {
+         stream.initialize(connection.getInputStream(), connection.getOutputStream());
       }
-
-      stream.initialize(connection.getInputStream(), connection.getOutputStream());
    }
 
    protected void disconnect() {
@@ -115,7 +112,6 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
       } catch (IOException ioe) {
          errorEvent.fireEvent(this, new ProtocolException(ioe));
       }
-
    }
 
    protected void read() throws IOException {
@@ -139,6 +135,5 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
    public boolean isRunning() { return running; }
 
    public long getTimeout() { return timeout; }
-
    public void setTimeout(long timeout) { this.timeout = timeout; }
 }

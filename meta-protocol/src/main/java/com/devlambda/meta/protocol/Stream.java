@@ -36,7 +36,6 @@ public abstract class Stream<Packet extends com.devlambda.meta.protocol.Packet> 
          out.write(packet.getRawdata());
          out.flush();
       } // object lock
-
    }
 
    /**

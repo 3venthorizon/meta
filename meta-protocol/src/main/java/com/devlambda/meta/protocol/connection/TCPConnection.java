@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.util.function.Supplier;
 
 import com.devlambda.meta.protocol.Connection;
 import com.devlambda.meta.protocol.ProtocolException;
@@ -17,59 +18,61 @@ import com.devlambda.meta.protocol.ProtocolException;
 public class TCPConnection implements Connection {
 
    private Socket socket;
+   private Supplier<Socket> supplier;
    private SocketAddress endpoint;
    private int timeout;
-
-   public TCPConnection(Socket socket, SocketAddress endpoint, int timeout) {
-      this.socket = socket;
+   
+   public TCPConnection(Supplier<Socket> supplier, SocketAddress endpoint, int timeout) {
+      this.supplier = supplier;
       this.endpoint = endpoint;
       this.timeout = timeout;
-   }
-
-   public TCPConnection(Socket socket) {
-      this(socket, null, -1);
    }
 
    @Override
    public void close() throws IOException {
       socket.close();
+      socket = null;
    }
 
    @Override
    public void open() throws IOException {
       if (isConnected()) return;
 
-      if (timeout > 0) {
-         socket.connect(endpoint, timeout);
-      } else {
-         socket.connect(endpoint);
-      }
+      try {
+         socket = supplier.get();
 
+         if (timeout > 0) {
+            socket.connect(endpoint, timeout);
+         } else {
+            socket.connect(endpoint);
+         }
+      } catch (IOException ioe) {
+         socket = null;
+         throw ioe;
+      }
    }
 
    @Override
-   public boolean isConnected() { return socket.isConnected() && socket.isClosed(); }
+   public boolean isConnected() { 
+      return socket != null && socket.isConnected() && !socket.isClosed(); 
+   }
 
    @Override
    public InputStream getInputStream() {
-
       try {
          return socket.getInputStream();
       } catch (IOException ioe) {
          throw new ProtocolException(ioe);
       }
-
    }
 
    @Override
    public OutputStream getOutputStream() {
-
       try {
          return socket.getOutputStream();
       } catch (IOException ioe) {
          throw new ProtocolException(ioe);
       }
-
    }
 
    public Socket getSocket() { return socket; }

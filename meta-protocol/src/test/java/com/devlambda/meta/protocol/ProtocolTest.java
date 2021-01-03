@@ -36,6 +36,10 @@ public class ProtocolTest {
    @Before
    public void before() {
       protocol = spy(new Protocol<>(connection, stream));
+      protocol.connectionEvent.setExecutor(Runnable::run);
+      protocol.readEvent.setExecutor(Runnable::run);
+      protocol.sendEvent.setExecutor(Runnable::run);
+      protocol.errorEvent.setExecutor(Runnable::run);
    }
 
    @Test
@@ -81,10 +85,10 @@ public class ProtocolTest {
       InOrder inOrder = inOrder(connection, observer, stream);
       inOrder.verify(connection).isConnected();
       inOrder.verify(connection).open();
-      inOrder.verify(observer).onEvent(protocol, connection);
       inOrder.verify(connection).getInputStream();
       inOrder.verify(connection).getOutputStream();
       inOrder.verify(stream).initialize(inputStream, outputStream);
+      inOrder.verify(observer).onEvent(protocol, connection);
       verify(protocol).connect();
       verifyNoMoreInteractions(protocol, connection, stream);
    }

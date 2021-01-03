@@ -36,8 +36,7 @@ public class Slave<Packet extends com.devlambda.meta.protocol.Packet> extends Pr
 
    protected void processCommand(Packet request) {
       Command<Packet> processor = commands.stream().filter(command -> command.isSupported(request)).findFirst()
-            .orElse(null);
-      if (processor == null) throw new ProtocolException("Slave Command not found for Request");
+            .orElseThrow(() -> new ProtocolException("Slave Command not found for Request"));
       Packet response = processor.execute(request);
 
       send(response);

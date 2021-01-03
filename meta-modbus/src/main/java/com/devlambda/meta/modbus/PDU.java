@@ -245,7 +245,7 @@ public class PDU extends Packet {
    }
 
    public PDU(DataBuilder builder) {
-      super(builder);
+      super(builder.data);
    }
 
    public int getFunctionCode() { return rawdata[0] & 0xFF; }
