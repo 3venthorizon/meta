@@ -382,10 +382,10 @@ public class ProtocolTest {
       protocol.disconnect();
 
       verify(errorObserver).onEvent(eq(protocol), any(ProtocolException.class));
+      verify(connectionObserver).onEvent(protocol, connection);
       ProtocolException result = errorCaptor.getValue();
       assertNotNull(result);
       assertEquals(ioe, result.getCause());
-      verifyZeroInteractions(connectionObserver);
    }
 
    @Test

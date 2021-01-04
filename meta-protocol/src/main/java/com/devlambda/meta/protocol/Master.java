@@ -29,12 +29,10 @@ public class Master<Packet extends com.devlambda.meta.protocol.Packet> {
    }
 
    /**
-    * 
     * @param request
     * @return response
     */
    public Packet request(Packet request, long timeout) throws ProtocolException {
-
       try {
          if (!semaphore.tryAcquire(timeout, TimeUnit.MILLISECONDS)) {
             throw new ProtocolException("Request Timedout " + timeout + "ms");
@@ -48,16 +46,10 @@ public class Master<Packet extends com.devlambda.meta.protocol.Packet> {
       } finally {
          semaphore.release();
       }
-
    }
 
-   public Protocol<Packet> getProtocol() {
-      return protocol;
-   }
-
-   public void setProtocol(Protocol<Packet> protocol) {
-      this.protocol = protocol;
-   }
+   public Protocol<Packet> getProtocol() { return protocol; }
+   public void setProtocol(Protocol<Packet> protocol) { this.protocol = protocol; }
 
    protected synchronized Packet requestResponse(Packet request, long timeout) throws ProtocolException {
       response = null;

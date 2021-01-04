@@ -22,11 +22,10 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
    protected Connection connection;
    protected Stream<Packet> stream;
 
-   long timeout;
-
    Thread runner;
    boolean running;
    boolean reading;
+   long timeout;
 
    public Protocol(Connection connection, Stream<Packet> stream) {
       this.connection = connection;
@@ -108,9 +107,10 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
 
       try {
          connection.close();
-         connectionEvent.fireEvent(this, connection);
       } catch (IOException ioe) {
          errorEvent.fireEvent(this, new ProtocolException(ioe));
+      } finally {
+         connectionEvent.fireEvent(this, connection);
       }
    }
 
