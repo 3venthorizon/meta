@@ -31,11 +31,10 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
       this.connection = connection;
       this.stream = stream;
 
-      readEvent = new Event<>();
-      sendEvent = new Event<>();
-      errorEvent = new Event<>();
-      connectionEvent = new Event<>();
-      setEventExecutor(runnable -> new Thread(runnable, "Async Protocol Event").start());
+      readEvent = new Event<>(Event.ASYNC);
+      sendEvent = new Event<>(Event.ASYNC);
+      errorEvent = new Event<>(Event.ASYNC);
+      connectionEvent = new Event<>(Event.ASYNC);
 
       timeout = -1L;
       running = false;
