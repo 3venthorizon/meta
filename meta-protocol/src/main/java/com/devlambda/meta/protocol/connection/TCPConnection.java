@@ -31,7 +31,7 @@ public class TCPConnection implements Connection {
    @Override
    public void close() throws IOException {
       try {
-         socket.close();
+         if (socket != null) socket.close();
       } finally {
          socket = null;
       }
