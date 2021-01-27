@@ -49,16 +49,13 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
       try {
          runner = Thread.currentThread();
          running = true;
-         reading = true;
-
          connect();
          read();
       } catch (IOException ioe) {
          errorEvent.fireEvent(this, new ProtocolException(ioe));
       } finally {
-         disconnect();
          running = false;
-         reading = false;
+         disconnect();
       }
    }
 
@@ -114,13 +111,19 @@ public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> impleme
    }
 
    protected void read() throws IOException {
-      while (reading) {
-         try {
-            Packet packet = stream.read();
-            readEvent.fireEvent(this, packet);
-         } catch (ProtocolException pe) {
-            errorEvent.fireEvent(this, pe);
+      try {
+         reading = true;
+         
+         while (reading) {
+            try {
+               Packet packet = stream.read();
+               readEvent.fireEvent(this, packet);
+            } catch (ProtocolException pe) {
+               errorEvent.fireEvent(this, pe);
+            }
          }
+      } finally {
+         reading = false;
       }
    }
 

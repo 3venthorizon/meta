@@ -231,7 +231,7 @@ public class ProtocolTest {
          protocol.read();
       } catch (IOException ioError) {
          assertEquals(ioe, ioError);
-         assertTrue(protocol.reading);
+         assertFalse(protocol.reading);
 
          protocol.read(); // retry reading unit protocol.reading is false
 
@@ -252,11 +252,11 @@ public class ProtocolTest {
 
    @Test
    public void testRun() throws IOException {
-      Answer<?> isRunningAndReading = 
-         invoke -> { assertTrue(protocol.running); assertTrue(protocol.reading); return null; };
-      doAnswer(isRunningAndReading).when(protocol).connect();
-      doAnswer(isRunningAndReading).when(protocol).read();
-      doAnswer(isRunningAndReading).when(protocol).disconnect();
+      Answer<?> isRunning = invoke -> { assertTrue(protocol.running); return null; };
+      Answer<?> isStopped = invoke -> { assertFalse(protocol.running); return null; };
+      doAnswer(isRunning).when(protocol).connect();
+      doAnswer(isRunning).when(protocol).read();
+      doAnswer(isStopped).when(protocol).disconnect();
 
       protocol.run();
 
@@ -322,9 +322,10 @@ public class ProtocolTest {
       assertFalse(protocol.isRunning());
 
       Answer<?> isRunning = invoke -> { assertTrue(protocol.isRunning()); return null; };
+      Answer<?> isStopped = invoke -> { assertFalse(protocol.running); return null; };
       doAnswer(isRunning).when(protocol).connect();
       doAnswer(isRunning).when(protocol).read();
-      doAnswer(isRunning).when(protocol).disconnect();
+      doAnswer(isStopped).when(protocol).disconnect();
 
       protocol.run();
 
