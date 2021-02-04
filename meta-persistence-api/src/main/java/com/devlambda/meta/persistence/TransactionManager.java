@@ -127,7 +127,7 @@ public class TransactionManager implements Transaction {
       } catch (SQLException sqle) {
          throw new RuntimeException("Failed to rollback transaction", sqle);
       } finally {
-         endTransaction();
+         endTransaction(connection);
       }
    }
 
@@ -141,7 +141,7 @@ public class TransactionManager implements Transaction {
       } catch (SQLException sqle) {
          throw new RuntimeException("Failed to commit transaction", sqle);
       } finally {
-         endTransaction();
+         endTransaction(connection);
       }
    }
 
@@ -151,8 +151,7 @@ public class TransactionManager implements Transaction {
       sequencePool.close();
    }
 
-   protected void endTransaction() {
-      Connection connection = transaction.get();
+   protected void endTransaction(Connection connection) {
       transaction.set(null);
 
       synchronized (transactionMap) {

@@ -77,7 +77,7 @@ public class OneToManyGraphIT {
    private static void setupData() throws Exception {
       mpa.register(TYPE_COUNTRY, Statement.RETURN_GENERATED_KEYS);
       mpa.register(TYPE_CITY, Statement.RETURN_GENERATED_KEYS);
-      mpa.beginTransaction();
+      mpa.begin();
       
       { //South Africa
          Country country = mpa.persist(new Country("South Africa"));

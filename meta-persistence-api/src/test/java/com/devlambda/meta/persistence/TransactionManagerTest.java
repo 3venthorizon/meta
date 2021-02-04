@@ -218,7 +218,7 @@ public class TransactionManagerTest {
       spy.rollback(null); //test no operation for no transaction
       spy.rollback(savepoint); //test no operation for no transaction
 
-      doNothing().when(spy).endTransaction();
+      doNothing().when(spy).endTransaction(connection);
       doNothing().when(connection).rollback(savepoint);
       doNothing().when(connection).rollback();
       doThrow(sqle).when(connection).rollback(errorpoint);
@@ -238,7 +238,7 @@ public class TransactionManagerTest {
          inOrder.verify(connection).rollback(errorpoint);
 
          verify(transaction, times(5)).get();
-         verify(spy, times(3)).endTransaction();
+         verify(spy, times(3)).endTransaction(connection);
          verifyNoMoreInteractions(connection);
          verifyZeroInteractions(savepoint, errorpoint);
 
@@ -282,13 +282,9 @@ public class TransactionManagerTest {
    public void testEndTransaction() {
       Connection connection = mock(Connection.class);
 
-      when(transaction.get()).thenReturn(connection); 
+      spy.endTransaction(connection); //test
 
-      spy.endTransaction(); //test
-
-      InOrder inOrder = inOrder(transaction);
-      inOrder.verify(transaction).get();
-      inOrder.verify(transaction).set(null);
+      verify(transaction).set(null);
       verify(transactionMap).remove(connection);
       verifyNoMoreInteractions(transaction, transactionMap);
       verifyZeroInteractions(connection);

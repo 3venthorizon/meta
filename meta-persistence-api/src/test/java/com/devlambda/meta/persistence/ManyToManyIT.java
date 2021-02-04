@@ -115,7 +115,7 @@ public class ManyToManyIT {
                    Statement.NO_GENERATED_KEYS);
       mpa.setQuery(QUERY_JOIN_ALL, SQL_QUERY_JOIN_ALL);
       
-      mpa.beginTransaction();
+      mpa.begin();
       
       studentIds.add(mpa.persist(new Student("Dewald Pretorius")).getId());
       studentIds.add(mpa.persist(new Student("Ahsoka Tano")).getId());

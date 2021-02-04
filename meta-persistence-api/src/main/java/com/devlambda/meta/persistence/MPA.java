@@ -139,14 +139,14 @@ public class MPA extends Repository {
    public void close() {
       if (transaction == connector) transaction.close();
    }
-
+   
    /**
     * Starts a new transaction. This has no affect when the current {@link Thread} is already associated with a 
     * transaction.
     * 
     * @return connection
     */
-   public synchronized Connection beginTransaction() {
+   public synchronized Connection begin() {
       if (transaction == connector) return transaction.begin();
 
       transaction = new TransactionManager(connector);
@@ -164,7 +164,7 @@ public class MPA extends Repository {
    public Savepoint setSavepoint() {
       if (transaction == connector) return transaction.setSavePoint();
 
-      beginTransaction();
+      begin();
       return transaction.setSavePoint();
    }
 
@@ -203,7 +203,6 @@ public class MPA extends Repository {
          blob.setBytes(1, binary);
          return blob;
       } catch (SQLException sqle) {
-         rollback();
          throw new RuntimeException("Error creating blob", sqle);
       }
    }
@@ -218,7 +217,6 @@ public class MPA extends Repository {
       try {
          return blob.getBytes(1, (int) blob.length());
       } catch (SQLException sqle) {
-         rollback();
          throw new RuntimeException("Error extracting blob", sqle);
       }
    }
@@ -308,7 +306,7 @@ public class MPA extends Repository {
       Class<M> metaClass = (Class<M>) prototype.getClass();
       return getMetaRepo(metaClass);
    }
-
+   
    /**
     * Returns the meta repository for the <code>metaClass</code>.
     * 
@@ -326,6 +324,10 @@ public class MPA extends Repository {
       }
 
       return null;
+   }
+   
+   public TransactionPlanner getTransactionPlanner() {
+      return new TransactionPlanner(this);
    }
 
    /**
@@ -367,7 +369,6 @@ public class MPA extends Repository {
             return record;
          }
       } catch (SQLException sqle) {
-         rollback();
          String message = "Error persisting " + repo.metaClass.getSimpleName() + " into Table " + repo.tableName;
          throw new RuntimeException(message, sqle);
       }
@@ -404,7 +405,6 @@ public class MPA extends Repository {
          List<M> list = extract(resultSet, repo.type);
          return list.stream().findFirst();
       } catch (SQLException sqle) {
-         rollback();
          String message = "Error finding " + repo.metaClass.getSimpleName() + 
                           " record by Id from Table " + repo.tableName;
          throw new RuntimeException(message, sqle);
@@ -429,7 +429,6 @@ public class MPA extends Repository {
            ResultSet resultSet = statement.executeQuery();) {
          return extract(resultSet, repo.type);
       } catch (SQLException sqle) {
-         rollback();
          String message = "Error retrieving all " + repo.metaClass.getSimpleName() + " from Table " + repo.tableName;
          throw new RuntimeException(message, sqle);
       }
@@ -458,7 +457,6 @@ public class MPA extends Repository {
       try (ResultSet resultSet = executeQuery(statement, columns, repo.type, criteria);) {
          return extract(resultSet, repo.type);
       } catch (SQLException sqle) {
-         rollback();
          throw new RuntimeException("Error finding by SQL:" + findBySQL, sqle);
       }
    }
@@ -486,7 +484,6 @@ public class MPA extends Repository {
          if (!updated.isEmpty()) return updated.get(0);
          return persist(record);
       } catch (SQLException sqle) {
-         rollback();
          String message = "Error merging " + repo.metaClass.getSimpleName() + 
                           " record by Id from Table " + repo.tableName;
          throw new RuntimeException(message, sqle);
@@ -511,7 +508,6 @@ public class MPA extends Repository {
          if (removed.isEmpty()) return null;
          return removed.get(0);
       } catch (SQLException sqle) {
-         rollback();
          String message = "Error removing " + repo.metaClass.getSimpleName() + 
                           " record by Id from Table " + repo.tableName; 
          throw new RuntimeException(message, sqle);
@@ -537,7 +533,6 @@ public class MPA extends Repository {
          if (removed.isEmpty()) return null;
          return removed.get(0);
       } catch (SQLException sqle) {
-         rollback();
          String message = "Error removing " + repo.metaClass.getSimpleName() + 
                           " record by Id from Table " + repo.tableName; 
          throw new RuntimeException(message, sqle);
