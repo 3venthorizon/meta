@@ -16,8 +16,8 @@ for Round Robin connection distribution and scaling.
 with java.lang.Thread process java.sql.Connection affinity.
     * Split purpose auto-commit and transactional connection pools.
     * Transaction Planner 
-    *** Operation Chaining
-    *** Multi savepoint rollbacks
-    *** Transaction forking
+      * Operation Chaining
+      * Multi savepoint rollbacks
+      * Transaction forking
 * [Repository](https://github.com/3venthorizon/meta/tree/master/meta-persistence-api/src/main/java/com/devlambda/meta/persistence/Repository.java) 
 access to java.sql.* resources used without compromising database and session state.
