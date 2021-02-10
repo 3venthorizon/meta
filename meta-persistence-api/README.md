@@ -15,7 +15,9 @@ for Round Robin connection distribution and scaling.
 * Transparent [Transaction Management](https://github.com/3venthorizon/meta/tree/master/meta-persistence-api/src/main/java/com/devlambda/meta/persistence/TransactionManager.java)
 with java.lang.Thread process java.sql.Connection affinity.
     * Split purpose auto-commit and transactional connection pools.
-    * Auto Rollback on java.sql.SQLException.
-    * Multi savepoint rollbacks.
+    * Transaction Planner 
+    *** Operation Chaining
+    *** Multi savepoint rollbacks
+    *** Transaction forking
 * [Repository](https://github.com/3venthorizon/meta/tree/master/meta-persistence-api/src/main/java/com/devlambda/meta/persistence/Repository.java) 
 access to java.sql.* resources used without compromising database and session state.
