@@ -4,9 +4,6 @@ package com.devlambda.meta.persistence.domain.school;
 import com.devlambda.meta.persistence.domain.Tuple;
 
 
-/**
- * @author Dewald Pretorius
- */
 public class StudentClassMap extends Tuple<Long, Long> {
 
    public StudentClassMap() {

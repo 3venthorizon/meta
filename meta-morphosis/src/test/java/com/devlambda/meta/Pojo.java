@@ -8,8 +8,6 @@ import java.util.Objects;
 
 /**
  * Plain Old Java Object.
- * 
- * @author Dewald Pretorius
  */
 public class Pojo {
    

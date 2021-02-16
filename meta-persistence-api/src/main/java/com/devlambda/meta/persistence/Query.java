@@ -14,8 +14,6 @@ import java.util.function.Supplier;
 
 /**
  * Query is a registry for cached {@link PreparedStatement}s and {@link Connection} associations.
- * 
- * @author Dewald Pretorius
  */
 public abstract class Query {
 

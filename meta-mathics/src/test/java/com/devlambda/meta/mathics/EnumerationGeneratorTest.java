@@ -13,9 +13,6 @@ import java.util.stream.IntStream;
 import org.junit.Test;
 
 
-/**
- * @author Dewald Pretorius
- */
 public class EnumerationGeneratorTest {
 
    @Test

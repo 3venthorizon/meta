@@ -21,8 +21,6 @@ import com.devlambda.meta.persistence.domain.location.Country;
 
 /**
  * One to Many Graph example using the {@link Country} to {@link City} relationship.
- * 
- * @author Dewald Pretorius
  */
 public class OneToManyGraphIT {
 

@@ -15,8 +15,6 @@ import org.junit.Test;
 
 /**
  * Unit Test {@link PermutationGenerator}.
- * 
- * @author Dewald Pretorius
  */
 public class PermutationGeneratorTest {
 

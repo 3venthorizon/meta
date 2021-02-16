@@ -6,8 +6,6 @@ import java.util.Set;
 
 /**
  * @param <E> the type of elements in this collection.
- *
- * @author Dewald Pretorius
  */
 public class SetDecorator<E> extends CollectionDecorator<E> implements Set<E> {
    

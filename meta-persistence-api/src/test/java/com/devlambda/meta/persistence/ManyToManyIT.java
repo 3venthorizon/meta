@@ -25,8 +25,6 @@ import com.devlambda.meta.persistence.domain.school.Subject;
 
 /**
  * Many to many Graph example using the {@link Student} to {@link Subject} relationship.
- * 
- * @author Dewald Pretorius
  */
 public class ManyToManyIT {
 

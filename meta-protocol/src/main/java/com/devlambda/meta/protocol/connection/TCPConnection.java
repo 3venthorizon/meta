@@ -12,9 +12,6 @@ import com.devlambda.meta.protocol.Connection;
 import com.devlambda.meta.protocol.ProtocolException;
 
 
-/**
- * @author Dewald Pretorius
- */
 public class TCPConnection implements Connection {
 
    private Socket socket;

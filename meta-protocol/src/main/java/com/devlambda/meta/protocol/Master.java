@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 
 /**
- * @author Dewald Pretorius
+ * Master {@link Protocol} wrapper.
  */
 @SuppressWarnings("hiding")
 public class Master<Packet extends com.devlambda.meta.protocol.Packet> {

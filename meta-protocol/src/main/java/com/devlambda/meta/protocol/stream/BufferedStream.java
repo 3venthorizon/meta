@@ -8,9 +8,6 @@ import com.devlambda.meta.protocol.ProtocolException;
 import com.devlambda.meta.protocol.Stream;
 
 
-/**
- * @author Dewald Pretorius
- */
 public class BufferedStream extends Stream<Packet> {
    
    protected final byte[] buffer;

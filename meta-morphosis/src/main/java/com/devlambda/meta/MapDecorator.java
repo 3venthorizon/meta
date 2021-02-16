@@ -8,11 +8,12 @@ import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+
 /**
+ * Map Decorator.
+ * 
  * @param <K> key
  * @param <V> value
-
- * @author Dewald Pretorius
  */
 public class MapDecorator<K, V> implements Map<K, V> {
    

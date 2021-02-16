@@ -17,8 +17,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * Unit Test {@link CollectionDecorator}.
- * 
- * @author Dewald Pretorius
  */
 @RunWith(MockitoJUnitRunner.class)
 public class CollectionDecoratorTest extends IterableDecoratorTest {

@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 
 
 /**
- * @author Dewald Pretorius
+ * Permutation Generator.
  */
 public class PermutationGenerator<T> extends AMetaRadixGenerator<T> implements RandomAccess {
 

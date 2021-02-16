@@ -7,7 +7,7 @@ import java.io.OutputStream;
 
 
 /**
- * @author Dewald Pretorius
+ * Connection.
  */
 public interface Connection {
 

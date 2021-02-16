@@ -7,8 +7,9 @@ import java.io.OutputStream;
 
 
 /**
+ * Input and Output Stream of {@link Packet}s.
+ * 
  * @param <Packet>
- * @author Dewald Pretorius
  */
 @SuppressWarnings("hiding")
 public abstract class Stream<Packet extends com.devlambda.meta.protocol.Packet> {

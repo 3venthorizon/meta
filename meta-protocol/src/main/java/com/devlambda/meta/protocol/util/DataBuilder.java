@@ -2,7 +2,7 @@ package com.devlambda.meta.protocol.util;
 
 
 /**
- * @author Dewald Pretorius
+ * Data Builder for byte arrays.
  */
 public class DataBuilder {
 

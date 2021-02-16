@@ -11,8 +11,6 @@ import java.util.stream.IntStream;
 
 /**
  * Abstract implementation of {@link IMetaRadixGenerator}.
- * 
- * @author Dewald Pretorius
  */
 public abstract class AMetaRadixGenerator<T> implements IMetaRadixGenerator<T> {
    

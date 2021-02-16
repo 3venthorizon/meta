@@ -20,8 +20,6 @@ import com.devlambda.meta.Type;
 /**
  * Repository is a JDBC Wrapper which allows data mapping between {@link PreparedStatement}s and {@link ResultSet}s to 
  * Meta{@link Type}s. The wrapped functions will throw the underlying {@link SQLException}s from the JDBC API.
- * 
- * @author Dewald Pretorius
  */
 public class Repository {
 

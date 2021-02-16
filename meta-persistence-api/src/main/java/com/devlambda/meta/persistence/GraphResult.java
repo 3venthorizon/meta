@@ -8,7 +8,7 @@ import java.util.Optional;
 
 
 /**
- * @author Dewald Pretorius
+ * Graph Result.
  */
 public class GraphResult {
 

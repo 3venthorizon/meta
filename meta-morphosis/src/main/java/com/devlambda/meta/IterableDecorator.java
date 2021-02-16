@@ -7,9 +7,9 @@ import java.util.function.Consumer;
 
 
 /**
- * @param <E> the type of elements in this collection.
+ * Iterable Decorator
  * 
- * @author Dewald Pretorius
+ * @param <E> the type of elements in this collection.
  */
 public class IterableDecorator<E> implements Iterable<E> {
    

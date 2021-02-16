@@ -13,8 +13,6 @@ import java.util.function.Supplier;
 /**
  * ConnectionPool is a round robin {@link Connection} provider to scale database access over a number of 
  * {@link Connection}s.
- * 
- * @author Dewald Pretorius
  */
 public class ConnectionPool implements Supplier<Connection> {
 

@@ -19,9 +19,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 
-/**
- * @author Dewald Pretorius
- */
 @RunWith(MockitoJUnitRunner.class)
 public class ConnectionPoolTest {
 

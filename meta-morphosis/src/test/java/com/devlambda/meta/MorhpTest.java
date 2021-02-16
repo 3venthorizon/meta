@@ -10,8 +10,6 @@ import org.junit.Test;
 
 /**
  * MorhpTest 
- *
- * @author Dewald Pretorius
  */
 public class MorhpTest {
 

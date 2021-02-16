@@ -7,7 +7,9 @@ import java.util.ListIterator;
 
 
 /**
- * @author Dewald Pretorius
+ * List Decorator.
+ * 
+ * @param <E> element
  */
 public class ListDecorator<E> extends CollectionDecorator<E> implements List<E> {
    

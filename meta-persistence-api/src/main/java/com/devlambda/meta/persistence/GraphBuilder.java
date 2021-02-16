@@ -20,8 +20,6 @@ import com.devlambda.meta.Type;
 /**
  * GraphBuilder is an utility class which provides methods to extract {@link ResultSet} record data into object
  * instances.
- * 
- * @author Dewald Pretorius
  */
 public class GraphBuilder {
    

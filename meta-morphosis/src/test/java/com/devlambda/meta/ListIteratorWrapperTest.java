@@ -23,8 +23,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * Unit Test {@link ListIteratorWrapper}.
- * 
- * @author Dewald Pretorius
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ListIteratorWrapperTest {

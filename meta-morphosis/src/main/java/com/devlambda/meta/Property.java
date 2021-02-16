@@ -10,8 +10,6 @@ import java.util.function.Function;
 
 /**
  * Property composing a getter and setter pair.
- *
- * @author Dewald Pretorius
  */
 public class Property<M, T> {
 

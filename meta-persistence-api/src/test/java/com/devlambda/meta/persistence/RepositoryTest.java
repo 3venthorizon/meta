@@ -25,9 +25,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.devlambda.meta.Type;
 
 
-/**
- * @author Dewald Pretorius
- */
 @RunWith(MockitoJUnitRunner.class)
 public class RepositoryTest {
 

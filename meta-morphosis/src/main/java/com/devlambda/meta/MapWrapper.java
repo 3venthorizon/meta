@@ -16,8 +16,6 @@ import java.util.Set;
  * </p>
  * 
  * @param <M> meta type
- * 
- * @author Dewald Pretorius
  */
 public class MapWrapper<M> implements Map<String, Object> {
    

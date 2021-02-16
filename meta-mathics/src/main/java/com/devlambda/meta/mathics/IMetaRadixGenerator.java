@@ -7,8 +7,6 @@ import java.util.ListIterator;
 
 /**
  * Interface used to generate mathematical groups for a domain collection.
- * 
- * @author Dewald Pretorius
  */
 public interface IMetaRadixGenerator<T> extends Iterable<List<T>>, ListIterator<List<T>> {
 

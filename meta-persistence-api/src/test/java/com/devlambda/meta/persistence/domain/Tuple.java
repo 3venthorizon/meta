@@ -9,8 +9,6 @@ import java.util.Objects;
  * 
  * @param <L> left
  * @param <R> right
- * 
- * @author Dewald Pretorius
  */
 public class Tuple<L, R> {
    

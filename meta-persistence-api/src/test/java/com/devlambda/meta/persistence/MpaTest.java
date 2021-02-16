@@ -13,9 +13,6 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 
-/**
- * @author Dewald Pretorius
- */
 @RunWith(MockitoJUnitRunner.class)
 public class MpaTest {
 

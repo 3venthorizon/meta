@@ -94,8 +94,6 @@ import com.devlambda.meta.Type;
  * <li>UPDATE: mpa.merge(person); //save or update finds the existing record by its primary key and persists the record
  * <li>DELETE: mpa.remove(person); //finds the existing record by its primary key and deletes the record
  * </ul>
- * 
- * @author Dewald Pretorius
  */
 public class MPA extends Repository {
 

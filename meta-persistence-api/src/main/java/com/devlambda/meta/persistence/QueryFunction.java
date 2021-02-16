@@ -12,8 +12,6 @@ import java.util.function.Supplier;
 
 /**
  * QueryFunction is an utility class to provide different types of {@link Query}s.
- * 
- * @author Dewald Pretorius
  */
 public class QueryFunction extends Query {
 

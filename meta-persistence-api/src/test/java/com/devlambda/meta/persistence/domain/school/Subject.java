@@ -8,8 +8,6 @@ import java.util.Set;
 
 /**
  * Subject in the school domain.
- * 
- * @author Dewald Pretorius
  */
 public class Subject {
 

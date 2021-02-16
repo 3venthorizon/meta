@@ -22,8 +22,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * Unit Test {@link MapDecorator}.
- * 
- * @author Dewald Pretorius
  */
 @RunWith(MockitoJUnitRunner.class)
 public class MapDecoratorTest {

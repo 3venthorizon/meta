@@ -1,7 +1,7 @@
 package com.devlambda.meta.protocol.util;
 
 /**
- * @author Dewald Pretorius
+ * Protocol Utilities.
  */
 public final class ProtoUtils {
 

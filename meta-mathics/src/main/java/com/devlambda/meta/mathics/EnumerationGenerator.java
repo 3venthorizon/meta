@@ -8,7 +8,7 @@ import java.util.RandomAccess;
 
 
 /**
- * @author Dewald Pretorius
+ * Enumeration Generator.
  */
 public class EnumerationGenerator<T> extends AMetaRadixGenerator<T> implements RandomAccess {
 

@@ -1,7 +1,8 @@
 package com.devlambda.meta.protocol;
 
+
 /**
- * @author Dewald Pretorius
+ * Packet.
  */
 public class Packet {
 

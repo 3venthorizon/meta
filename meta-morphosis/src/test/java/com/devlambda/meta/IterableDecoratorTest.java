@@ -17,8 +17,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 /**
  * Unit Test {@link IterableDecorator}.
- * 
- * @author Dewald Pretorius
  */
 @RunWith(MockitoJUnitRunner.class)
 public class IterableDecoratorTest {

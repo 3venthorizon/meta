@@ -6,8 +6,6 @@ import java.util.Objects;
 
 /**
  * City in the location domain.
- * 
- * @author Dewald Pretorius
  */
 public class City {
 

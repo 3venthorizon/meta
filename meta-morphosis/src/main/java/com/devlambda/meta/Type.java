@@ -4,6 +4,7 @@ package com.devlambda.meta;
 import static java.util.stream.Collectors.toCollection;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -45,7 +46,6 @@ import java.util.stream.Collectors;
  * </p>
  * 
  * @param <M> Meta
- * @author Dewald Pretorius
  * @see Morph#convert(Type, Object, Type, Object)
  */
 public class Type<M> {
@@ -89,6 +89,7 @@ public class Type<M> {
       
       while (!Objects.equals(inherited, Object.class)) {
          for (Field field : inherited.getDeclaredFields()) {
+            if (Modifier.isStatic(field.getModifiers())) continue;
             type.properties.add(Property.meta(field));
          }
          

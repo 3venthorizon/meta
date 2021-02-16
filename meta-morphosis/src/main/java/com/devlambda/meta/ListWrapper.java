@@ -16,8 +16,6 @@ import java.util.Objects;
  * To access the instance field values the {@link List#get(int)} can be used.
  * Changes made via the {@link List#set(int, Object)} will invoke the underlying instance's setters.
  * </p>
- * 
- * @author Dewald Pretorius
  */
 public class ListWrapper<M> implements List<Object> {
    

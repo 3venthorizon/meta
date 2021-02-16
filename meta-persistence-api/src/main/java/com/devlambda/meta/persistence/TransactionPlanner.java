@@ -10,8 +10,6 @@ import java.util.Map;
 
 /**
  * This builder constructs a transactional execution plan with exception rollback strategies.
- * 
- * @author Dewald Pretorius
  */
 public class TransactionPlanner {
    

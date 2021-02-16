@@ -8,7 +8,7 @@ import com.devlambda.eventhorizon.Observer;
 
 
 /**
- * @author Dewald Pretorius
+ * Slave {@link Protocol}.
  */
 @SuppressWarnings("hiding")
 public class Slave<Packet extends com.devlambda.meta.protocol.Packet> extends Protocol<Packet> {

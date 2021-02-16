@@ -9,8 +9,6 @@ import java.util.List;
 
 /**
  * SQL is an utility class to create basic SQL queries.
- *
- * @author Dewald Pretorius
  */
 public final class SQL {
 

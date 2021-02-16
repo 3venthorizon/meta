@@ -11,8 +11,6 @@ import java.util.function.Supplier;
 /**
  * Connector provides a thin wrapper for the {@link DriverManager} to create {@link Connection}s and {@link Connection}
  * providers.
- * 
- * @author Dewald Pretorius
  */
 public final class Connector {
    

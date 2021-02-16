@@ -14,8 +14,6 @@ import com.devlambda.meta.Type;
 
 /**
  * MetaRepo is a resource collection in association with a database table or {@link ResultSet}.
- *
- * @author Dewald Pretorius
  */
 public class MetaRepo<M> {
 

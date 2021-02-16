@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 
 /**
- * @author Dewald Pretorius
+ * Combination Generator.
  */
 public class CombinationGenerator<T> implements Iterable<List<T>>, Iterator<List<T>> {
 

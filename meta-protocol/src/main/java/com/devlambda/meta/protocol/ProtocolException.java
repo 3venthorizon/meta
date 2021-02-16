@@ -2,7 +2,7 @@ package com.devlambda.meta.protocol;
 
 
 /**
- * @author Dewald Pretorius
+ * Protocol Exception.
  */
 public class ProtocolException extends RuntimeException {
    static final long serialVersionUID = -6127823216122291686L;

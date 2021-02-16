@@ -10,8 +10,6 @@ import java.util.function.Supplier;
 
 /**
  * Morph is an utility class that provides static methods which operates on {@link Type}s.
- *
- * @author Dewald Pretorius
  */
 public final class Morph {
 

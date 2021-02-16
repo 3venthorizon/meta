@@ -10,8 +10,6 @@ import java.util.function.Supplier;
 
 /**
  * TransactionManager is a {@link Connection} provider with the ability to control database transactions.
- * 
- * @author Dewald Pretorius
  */
 public class TransactionManager implements Transaction {
 

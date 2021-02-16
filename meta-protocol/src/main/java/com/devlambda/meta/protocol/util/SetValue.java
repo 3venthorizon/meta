@@ -2,7 +2,7 @@ package com.devlambda.meta.protocol.util;
 
 
 /**
- * @author Dewald Pretorius
+ * Byte array value Setter.
  */
 public interface SetValue {
 

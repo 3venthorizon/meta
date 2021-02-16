@@ -8,8 +8,6 @@ import java.util.Set;
 
 /**
  * Country in the location domain.
- * 
- * @author Dewald Pretorius
  */
 public class Country {
 

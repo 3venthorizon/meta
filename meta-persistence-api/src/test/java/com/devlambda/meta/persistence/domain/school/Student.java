@@ -8,8 +8,6 @@ import java.util.Set;
 
 /**
  * Student in the school domain.
- * 
- * @author Dewald Pretorius
  */
 public class Student {
 

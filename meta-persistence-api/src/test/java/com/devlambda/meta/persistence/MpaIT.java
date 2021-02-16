@@ -23,9 +23,6 @@ import org.junit.Test;
 import com.devlambda.meta.Type;
 
 
-/**
- * @author Dewald Pretorius
- */
 public class MpaIT {
 
    interface MapPerson {

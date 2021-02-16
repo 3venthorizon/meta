@@ -1,5 +1,6 @@
 package com.devlambda.meta;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.spy;
 
@@ -10,9 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 
-/**
- * @author Dewald Pretorius
- */
 @RunWith(MockitoJUnitRunner.class)
 public class SetDecoratorTest extends CollectionDecoratorTest {
    protected @Mock Set<Integer> set;

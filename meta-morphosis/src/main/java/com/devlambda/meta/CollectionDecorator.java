@@ -8,8 +8,6 @@ import java.util.stream.Stream;
 
 /**
  * @param <E> the type of elements in this collection.
- *
- * @author Dewald Pretorius
  */
 public class CollectionDecorator<E> extends IterableDecorator<E> implements Collection<E> {
    

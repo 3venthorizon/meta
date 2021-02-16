@@ -8,8 +8,9 @@ import com.devlambda.eventhorizon.Event;
 
 
 /**
- * @param <Packet>
- * @author Dewald Pretorius
+ * Protocol.
+ * 
+ * @param <Packet> 
  */
 @SuppressWarnings("hiding")
 public class Protocol<Packet extends com.devlambda.meta.protocol.Packet> implements Runnable {

@@ -8,8 +8,6 @@ import java.util.ListIterator;
  * A value wrapper for meta {@link Type} instances to iterate over their values.
  * 
  * @param <M> meta type
- * 
- * @author Dewald Pretorius
  */
 public class ListIteratorWrapper<M> implements ListIterator<Object> {
    

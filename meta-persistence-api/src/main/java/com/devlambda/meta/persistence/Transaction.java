@@ -8,8 +8,6 @@ import java.util.function.Supplier;
 
 /**
  * Transaction denotes the integration definition for controlling database transactions.
- * 
- * @author Dewald Pretorius
  */
 public interface Transaction extends Supplier<Connection> {
 
