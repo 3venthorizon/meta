@@ -1,11 +1,13 @@
 package com.devlambda.meta;
 
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 
 /**
@@ -55,8 +57,7 @@ public final class Morph {
       
       for (Property<M, Object> setter : to.getProperties()) {
          Object value = map.get(setter.name);
-         if (value != null && !setter.type.isAssignableFrom(value.getClass())) continue;
-         setter.set.accept(convert, value);
+         setter.setSafe(convert, value);
       }
       
       return convert;
@@ -130,15 +131,19 @@ public final class Morph {
          if (getter == null) {
             getter = from.getProperty(setter.name);
             if (getter == null) continue;
-            Object value = getter.get.apply(meta);
-            if (value != null && !setter.isAssignableFrom(value.getClass())) continue;
          }
 
          Object value = getter.get.apply(meta);
-         setter.set.accept(convert, value);
+         setter.setSafe(convert, value);
       }
 
       return convert;
+   }
+   
+   public static <G, S, C extends Collection<S>> C convert(Type<G> from, Collection<G> collection, 
+         Type<S> to, Supplier<C> supplier) {
+      return collection.stream().map(element -> Morph.convert(from, element, to))
+            .collect(Collectors.toCollection(supplier));
    }
    
    /**
